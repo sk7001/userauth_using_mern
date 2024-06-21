@@ -7,3 +7,4 @@ const connect_db = () => {
         console.log(err);
     })
 }
+module.exports = connect_db

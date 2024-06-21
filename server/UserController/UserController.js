@@ -1,0 +1,49 @@
+const UserModel = require("../Models/UserModel")
+const otp_generator = require("otp-generator")
+const bcrypt=require("bcrypt")
+
+const register = async (req, res) => {
+    try {
+        console.log(req.body);
+
+        const isUserExisting = await UserModel.findOne({ email: req.body.email })
+        if (isUserExisting) {
+            return res.status(400).json({ message: `User with the email ${req.body.email} already exists` });
+        }
+
+        const VerificationToken = otp_generator.generate(6, { digits: true, lowerCaseAlphabets: true, upperCaseAlphabets: false, specialChars: false })
+        
+        const expires = new Date
+        
+        expires.setMinutes(expires.getMinutes()+5)
+
+        const hashPassword = await bcrypt.hash(req.body.password,10)
+
+        const newUser = await UserModel({
+            email: req.body.email,
+            username: req.body.username,
+            password: hashPassword,
+            VerificationToken: {
+                token: VerificationToken,
+                expires:expires
+            }
+        })
+        
+        console.log(newUser);
+
+        await newUser.save()
+
+        res.json("User saved succssfully");
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+const login = async (req, res) => {
+    try {
+        res.json("login working succssfully");
+    } catch (error) {
+        res.json(error)
+    }
+}
+module.exports = { register, login }

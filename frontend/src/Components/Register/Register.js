@@ -3,7 +3,7 @@ import "./Register.css"
 import { useState } from "react";
 import { emailRegex, passwordRegex } from "../../Utils/Regex";
 import toast from "react-hot-toast";
-
+import axios from "axios";
 function Register() {
 
   const [userDetails, setuserDetails] = useState({
@@ -23,9 +23,10 @@ function Register() {
     //console.log(userDetails)
   }
 
-  function handleonclick() {
+  const handleonclick=async()=> {
     if(!userDetails.username){
       toast.error("Username is required");
+      return;
     }
 
     if (!emailRegex.test(userDetails.email)) {
@@ -38,7 +39,12 @@ function Register() {
       return;
     }
 
-    toast.success("You have Signedup successfully. Please login to continue.")
+    try{
+      const response= await axios.post("http://localhost:3000/user/register",userDetails);
+      console.log(response);
+    }catch(error){
+      console.log(error)
+    }
   }
 
   function handleshow(){
