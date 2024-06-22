@@ -1,6 +1,7 @@
 const UserModel = require("../Models/UserModel")
 const otp_generator = require("otp-generator")
-const bcrypt=require("bcrypt")
+const bcrypt = require("bcrypt")
+const sendEmail = require("../Emailservice/Email")
 
 const register = async (req, res) => {
     try {
@@ -12,12 +13,12 @@ const register = async (req, res) => {
         }
 
         const VerificationToken = otp_generator.generate(6, { digits: true, lowerCaseAlphabets: true, upperCaseAlphabets: false, specialChars: false })
-        
-        const expires = new Date
-        
-        expires.setMinutes(expires.getMinutes()+5)
 
-        const hashPassword = await bcrypt.hash(req.body.password,10)
+        const expires = new Date
+
+        expires.setMinutes(expires.getMinutes() + 5)
+
+        const hashPassword = await bcrypt.hash(req.body.password, 10)
 
         const newUser = await UserModel({
             email: req.body.email,
@@ -25,13 +26,17 @@ const register = async (req, res) => {
             password: hashPassword,
             VerificationToken: {
                 token: VerificationToken,
-                expires:expires
+                expires: expires
             }
         })
-        
+
         console.log(newUser);
 
         await newUser.save()
+
+        const emailBody = `<p> please click on the link to verify your account. <b>http://localhost:3000/user/verify/${verificationToken}</b></p>`;
+        const subject = 'Verification Email'
+        await sendEmail(req.body.email, subject, emailBody)
 
         res.json("User saved succssfully");
     } catch (error) {
