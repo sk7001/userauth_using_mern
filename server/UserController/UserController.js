@@ -9,10 +9,11 @@ const register = async (req, res) => {
 
         const isUserExisting = await UserModel.findOne({ email: req.body.email })
         if (isUserExisting) {
+            console.log(`User with the email ${req.body.email} already exists`)
             return res.status(400).json({ message: `User with the email ${req.body.email} already exists` });
         }
 
-        const VerificationToken = otp_generator.generate(6, { digits: true, lowerCaseAlphabets: true, upperCaseAlphabets: false, specialChars: false })
+        const verificationToken = otp_generator.generate(6, { digits: true, lowerCaseAlphabets: true, upperCaseAlphabets: false, specialChars: false })
 
         const expires = new Date
 
@@ -25,7 +26,7 @@ const register = async (req, res) => {
             username: req.body.username,
             password: hashPassword,
             VerificationToken: {
-                token: VerificationToken,
+                token: verificationToken,
                 expires: expires
             }
         })
@@ -34,9 +35,13 @@ const register = async (req, res) => {
 
         await newUser.save()
 
-        const emailBody = `<p> please click on the link to verify your account. <b>http://localhost:3000/user/verify/${verificationToken}</b></p>`;
+        const emailBody = `<p> Please click on the link to verify your account. <b>http://localhost:3000/user/verify/${verificationToken}</b></p>`;
         const subject = 'Verification Email'
-        await sendEmail(req.body.email, subject, emailBody)
+        await sendEmail(req.body.email, subject, emailBody).then(response => {
+            console.log('Email sent successfully:', response);
+        }).catch(error => {
+                console.error('Error sending email:', error);
+            });
 
         res.json("User saved succssfully");
     } catch (error) {
