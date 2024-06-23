@@ -69,7 +69,7 @@ const verifyUser = async (req, res) => {
         console.log(isTokenValid);
         if (isTokenValid) {
             isTokenValid.isVerified=true
-            res.send('Hello')
+            res.send(`Your email has been verified. Please login to continue.<a href="http://localhost:3001/signup">Login</a>`);
         }
         else{
             res.send('Link has been expired. Please signup again to continue.<a href="http://localhost:3001/register">Signup</a>')
@@ -80,4 +80,6 @@ const verifyUser = async (req, res) => {
         console.log(error)
     }
 }
+
+
 module.exports = { register, login, verifyUser }
