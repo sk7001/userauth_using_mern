@@ -40,8 +40,8 @@ const register = async (req, res) => {
         await sendEmail(req.body.email, subject, emailBody).then(response => {
             console.log('Email sent successfully:', response);
         }).catch(error => {
-                console.error('Error sending email:', error);
-            });
+            console.error('Error sending email:', error);
+        });
 
         res.json("User saved succssfully");
     } catch (error) {
@@ -56,4 +56,25 @@ const login = async (req, res) => {
         res.json(error)
     }
 }
-module.exports = { register, login }
+
+const verifyUser = async (req, res) => {
+    try {
+        console.log(req.params);
+        const { token } = req.params
+        const isTokenValid = await UserModel.findOne(
+        {
+            "VerificationToken.token": token,
+            'VerificationToken.expires': { $gt: new Date() }
+        });
+        console.log(isTokenValid);
+        if (isTokenValid) {
+            res.send('Hello')
+        }
+        else{
+            res.send('Link has been expired. Please signup again to continue.<a href="http://localhost:3001/register">Signup</a>')
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = { register, login, verifyUser }
