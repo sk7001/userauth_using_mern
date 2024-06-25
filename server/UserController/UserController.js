@@ -69,10 +69,10 @@ const verifyUser = async (req, res) => {
         console.log(isTokenValid);
         if (isTokenValid) {
             isTokenValid.isVerified=true
-            res.send(`Your email has been verified. Please login to continue.<a href="http://localhost:3001/signup">Login</a>`);
+            res.send(`Your email has been verified. Please login to continue.<a href="http://localhost:3000/signup">Login</a>`);
         }
         else{
-            res.send('Link has been expired. Please signup again to continue.<a href="http://localhost:3001/register">Signup</a>')
+            res.send('Link has been expired. Please signup again to continue.<a href="http://localhost:3000/register">Signup</a>')
             return res.status(400).json({message:"Token ivalid or expired"})
         }
         await isTokenValid.save()
