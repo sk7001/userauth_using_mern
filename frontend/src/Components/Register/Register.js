@@ -40,7 +40,7 @@ function Register() {
     }
 
     try{
-      const response= await axios.post("http://192.168.1.43:3000/user/register",userDetails);
+      const response= await axios.post("http://192.168.1.43:2000/user/register",userDetails);
       console.log(response);
     }catch(error){
       console.log(error)
