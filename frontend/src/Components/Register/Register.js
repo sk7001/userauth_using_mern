@@ -59,7 +59,7 @@ function Register() {
       <div className="FormContainer">
         <h2>Signup</h2>
         <div className="InputContainer">
-          <input value={userDetails.username} name="username" type="Text" onChange={handleonchange} placeholder="User Name" />
+          <input value={userDetails.username} name="username" type="text" onChange={handleonchange} placeholder="User Name" />
           <input value={userDetails.email} name="email" type="email" onChange={handleonchange} placeholder="E-Mail" />
           <div className="PasswordContainer">
             <input value={userDetails.password} name="password" type={show? "text" : "Password"} onChange={handleonchange} placeholder="Password" />

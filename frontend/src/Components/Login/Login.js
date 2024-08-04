@@ -98,7 +98,7 @@ function Login() {
             <input value={userDetails.password} name="password" type={show ? "text" : "Password"} onChange={handleonchange} placeholder="Password" />
             <button onClick={handleshow}>{show ? "HIDE" : "SHOW"}</button>
           </div>
-          <button onClick={handleonclick}>Signup</button>
+          <button onClick={handleonclick}>Login</button>
         </div>
         <Link to="/forgetpass">Forgot Password?</Link>
         <Link to="/register">Don't have an account? Register</Link>
