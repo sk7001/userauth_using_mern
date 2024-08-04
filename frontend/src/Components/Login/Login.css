@@ -111,6 +111,5 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: center;
-    border: 1px solid grey;
+    margin: 10px;
 }
