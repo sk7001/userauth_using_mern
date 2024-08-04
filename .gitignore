@@ -1,0 +1,7 @@
+# .gitignore sevrer
+server/node_modules
+server/.env
+
+# .gitignore frontend
+frontend/node_modules
+frontend/.env

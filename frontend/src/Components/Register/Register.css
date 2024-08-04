@@ -1,0 +1,108 @@
+.Container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.FormContainer {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 380px;
+    padding: 2rem;
+    border-radius: 20px;
+    align-items: center;
+}
+
+.InputContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    width: 100%;
+}
+
+.FormContainer>h2 {
+    margin-top: 0px;
+}
+
+.FormContainer a {
+    color: red;
+    text-decoration: none;
+    padding-top: 8px;
+    transition-duration: 300ms;
+}
+
+.FormContainer a:hover {
+    color: rgb(158, 0, 0);
+}
+
+.InputContainer>input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition-duration: 120ms;
+}
+
+.InputContainer>input:hover {
+    scale: 1.1;
+}
+
+.InputContainer>button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    background: red;
+    margin-bottom: 10px;
+    width: 150px;
+    align-self: center;
+    transition-duration: 400ms;
+}
+
+.InputContainer>button:hover {
+    background-color: rgb(158, 0, 0);
+    width: 100%;
+    align-self: center;
+}
+
+.PasswordContainer {
+    position: relative;
+}
+
+.PasswordContainer input {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    transition-duration: 120ms;
+    width: 100%;
+}
+
+.PasswordContainer>input:hover {
+    scale: 1.1;
+}
+
+.PasswordContainer button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 10px;
+    align-self: center;
+    transition-duration: 400ms;
+    cursor: pointer;
+    background: none;
+}
+
+.PasswordContainer>button:hover {
+    align-self: center;
+    text-decoration: underline;
+}
