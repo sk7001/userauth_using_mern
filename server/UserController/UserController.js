@@ -36,7 +36,7 @@ const register = async (req, res) => {
 
         await newUser.save()
 
-        const emailBody = `<p> Please click on the link to verify your account. <b>http://localhost:2000/user/verify/${verificationToken}</b></p>`;
+        const emailBody = `<p> Please click on the link to verify your account. <b>${process.env.SERVER_URL}/user/verify/${verificationToken}</b></p>`;
         const subject = 'Verification Email'
         await sendEmail(req.body.email, subject, emailBody).then(response => {
             console.log('Email sent successfully:', response);
