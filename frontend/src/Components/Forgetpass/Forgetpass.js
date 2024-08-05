@@ -32,15 +32,18 @@ const EmailComponent = ({ setStep }) => {
       return;
     }
     try {
+      toast.loading(`Sending mail to ${email}`)
       console.log(email);
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/resetpassword`, { email })
       localStorage.setItem("email", email)
+      toast.dismiss()
       toast.success(response.data.message)
       if (response) {
         setStep(1)
       }
     } catch (error) {
       console.log(error)
+      toast.dismiss()
       toast.error(error.response.data.message)
     }
   }
@@ -69,13 +72,16 @@ const OTPComponent = ({ setStep }) => {
       toast.error("OTP can't be empty.")
     }
     try {
+      toast.loading(`Verifying OTP`)
       const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/verifyPasswordOTP`, { otp })
       toast.success(response.data.message)
+      toast.dismiss()
       console.log(otp)
       if (response) {
         setStep(2)
       }
     } catch (error) {
+      toast.dismiss()
       console.log(error)
       toast.error(error.response.data.message)
     }
@@ -83,11 +89,14 @@ const OTPComponent = ({ setStep }) => {
 
   const handleonResend = async () => {
     try {
+      toast.loading(`Resending OTP`)
       const email = localStorage.getItem("email")
-      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/resetpassword`, { email, isResendOTP:true })
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/resetpassword`, { email, isResendOTP: true })
+      toast.dismiss()
       toast.success(response.data.message)
     } catch (error) {
       console.log(error)
+      toast.dismiss()
       toast.error(error.response.data.message)
     }
   }
@@ -127,6 +136,7 @@ const PasswordComponent = () => {
       return toast.error("Passwords do not match")
     }
     try {
+      toast.loading(`Resetting password`)
       const email = localStorage.getItem("email")
       console.log(email)
       const sendpassword = {
@@ -137,11 +147,13 @@ const PasswordComponent = () => {
       if (response) {
         navigate("/")
       }
+      toast.dismiss()
       toast.success(response.data.message)
       console.log(response)
       localStorage.clear()
     } catch (error) {
       console.log(error)
+      toast.dismiss()
       toast.error(error.response.data.message)
     }
   }
