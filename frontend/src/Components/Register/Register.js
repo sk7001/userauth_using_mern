@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css"
 import { useState } from "react";
 import { emailRegex, passwordRegex } from "../../Utils/Regex";
@@ -7,7 +7,6 @@ import axios from "axios";
 
 
 function Register() {
-
   const [userDetails, setuserDetails] = useState({
     username: "",
     email: "",
@@ -25,8 +24,10 @@ function Register() {
     console.log(userDetails)
   }
 
-  const handleonclick=async()=> {
-    if(!userDetails.username){
+  const navigate = useNavigate();
+
+  const handleonclick = async () => {
+    if (!userDetails.username) {
       toast.error("Username is required");
       return;
     }
@@ -41,15 +42,21 @@ function Register() {
       return;
     }
 
-    try{
-      const response= await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/register`,userDetails);
-      console.log(response);
-    }catch(error){
+    try {
+      toast.loading("Signing up")
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/register`, userDetails);
+      console.log(response.data);
+      toast.dismiss();
+      toast.success(response.data.message)
+      navigate("/")
+    } catch (error) {
       console.log(error)
+      toast.dismiss();
+      toast.error(error.response.data.message)
     }
   }
 
-  function handleshow(){
+  function handleshow() {
     setshow(!show)
   }
 
@@ -59,11 +66,11 @@ function Register() {
       <div className="FormContainer">
         <h2>Signup</h2>
         <div className="InputContainer">
-          <input value={userDetails.username} name="username" type="text" onChange={handleonchange} placeholder="User Name" />
-          <input value={userDetails.email} name="email" type="email" onChange={handleonchange} placeholder="E-Mail" />
+          <input value={userDetails.username} name="username" type="text" onChange={handleonchange} placeholder="User Name" autocomplete="off" />
+          <input value={userDetails.email} name="email" type="text" onChange={handleonchange} placeholder="E-Mail" autocomplete="off" />
           <div className="PasswordContainer">
-            <input value={userDetails.password} name="password" type={show? "text" : "Password"} onChange={handleonchange} placeholder="Password" />
-            <button onClick={handleshow}>{show? "HIDE" : "SHOW"}</button>
+            <input value={userDetails.password} name="password" type={show ? "text" : "Password"} onChange={handleonchange} placeholder="Password" autocomplete="off" />
+            <button onClick={handleshow}>{show ? "HIDE" : "SHOW"}</button>
           </div>
           <button onClick={handleonclick}>Signup</button>
         </div>
