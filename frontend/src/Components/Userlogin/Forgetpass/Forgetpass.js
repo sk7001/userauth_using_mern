@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom'
-import { emailRegex, passwordRegex } from '../../Utils/Regex';
+import { emailRegex, passwordRegex } from '../../../Utils/Regex';
 import axios from 'axios';
 
 

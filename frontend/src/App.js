@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
+import Register from './Components/Userlogin/Register/Register';
 import Home from './Components/Home/Home';
 import Auth from './Utils/Auth';
-import Forgotpass from './Components/Forgetpass/Forgetpass';
-import ResendVerification from './Components/ResendVerification/ResendVerification';
+import Forgotpass from './Components/Userlogin/Forgetpass/Forgetpass';
+import ResendVerification from './Components/Userlogin/ResendVerification/ResendVerification';
 
 function App() {
   return (
