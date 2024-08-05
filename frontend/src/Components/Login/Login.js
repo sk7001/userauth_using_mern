@@ -51,13 +51,12 @@ function Login() {
   function handleshow() {
     setshow(!show)
   }
-
   const handleContinueWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
       const userData = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-        headers: { 'Authorization': `Bearer ${response.access_token}` }
+        headers: { 'Authorization': `Bearer ${response.access_token}` }        
       });
-      
+      console.log(userData);
       const newUser={
         username:userData.data.name,
         email:userData.data.email,
