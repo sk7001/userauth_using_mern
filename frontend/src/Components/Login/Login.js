@@ -99,8 +99,9 @@ function Login() {
           </div>
           <button onClick={handleonclick}>Login</button>
         </div>
-        <Link to="/forgetpass">Forgot Password?</Link>
+        <Link to="/forgetpass">Forgot Password? Reset</Link>
         <Link to="/register">Don't have an account? Register</Link>
+        <Link to="/resendverificationlink">Lost verification link? Resend again</Link>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Register from './Components/Register/Register';
 import Home from './Components/Home/Home';
 import Auth from './Utils/Auth';
 import Forgotpass from './Components/Forgetpass/Forgetpass';
+import ResendVerification from './Components/ResendVerification/ResendVerification';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/forgetpass' element={<Forgotpass/>}/>
+        <Route path='/resendverificationlink' element={<ResendVerification/>}/>
         <Route element={<Auth />}>
           <Route path='/home' element={<Home />} />
         </Route>
