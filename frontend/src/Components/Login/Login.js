@@ -4,7 +4,7 @@ import { useState } from "react";
 import { emailRegex, passwordRegex } from "../../Utils/Regex";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { FacebookLoginButton, GoogleLoginButton } from "react-social-login-buttons";
+import {GoogleLoginButton } from "react-social-login-buttons";
 import { useGoogleLogin } from "@react-oauth/google";
 function Login() {
   const navigate = useNavigate()
@@ -84,9 +84,6 @@ function Login() {
       <div className="FormContainer">
         <h2>Login</h2>
         <div className="social">
-          <div>
-            <FacebookLoginButton ></FacebookLoginButton>
-          </div>
           <div>
             <GoogleLoginButton onClick={handleContinueWithGoogle}></GoogleLoginButton>
           </div>
