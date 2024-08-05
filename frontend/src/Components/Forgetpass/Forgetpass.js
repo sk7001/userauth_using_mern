@@ -123,7 +123,7 @@ const PasswordComponent = () => {
       toast.error("Passwords should contain atleast 8 characters with atleast one uppercase, one digit and one symbol");
       return;
     }
-    if (newpassword.password != newpassword.confirmPassword) {
+    if (newpassword.password !== newpassword.confirmPassword) {
       return toast.error("Passwords do not match")
     }
     try {
