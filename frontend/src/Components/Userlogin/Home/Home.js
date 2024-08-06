@@ -26,7 +26,7 @@ export default function Home() {
 
   const handleOnLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    window.location.href = "/login";
   }
   return (
     <div>
