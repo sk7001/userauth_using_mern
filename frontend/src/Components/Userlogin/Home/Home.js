@@ -2,25 +2,24 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 export default function Home() {
-  const [user,setUser]=useState({
-    name:"",
-    email:""
+  const [user, setUser] = useState({
+    name: "",
+    email: ""
   })
-  const getUser = async () => {
+  const getUser = useCallback(async () => {
     try {
-
-      const token = localStorage.getItem("token")
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/`, { headers: { Authorization: `Bearer ${token}` } })
-      console.log(response)
+      const token = localStorage.getItem("token");
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setUser({
         name: response.data.name,
         email: response.data.email
-      })
-      console.log(user)
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  }, []);
   useEffect(() => {
     getUser();
   }, [getUser]);
