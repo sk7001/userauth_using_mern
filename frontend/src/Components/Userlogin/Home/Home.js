@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react'
+import {useNavigate} from "react-router-dom"
 
 export default function Home() {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: ""
@@ -26,8 +28,7 @@ export default function Home() {
 
   const handleOnLogout = () => {
     localStorage.clear();
-    window.location.href = "/";
-    window.location.reload();
+    navigate('/')
 
   }
   return (
