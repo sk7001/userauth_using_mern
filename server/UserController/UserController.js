@@ -315,4 +315,20 @@ const updatePassword = async (req, res) => {
     }
 }
 
-module.exports = { register, login, verifyUser, resendVerification, updateUser, forgotPassword, verifyPasswordOTP, updatePassword }
+const getUser = async (req, res) => {
+    try {
+        const user = await UserModel.findOne({ _id: req.decodedData.id })
+        if (!user) {
+            return res.status(400).json({ message: "User not found" })
+        }
+        const userDetails = {
+            name: user.username,
+            email: user.email,
+        }
+        res.status(200).json(userDetails)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: "Something went wrong" })
+    }
+}
+module.exports = { register, login, verifyUser, resendVerification, updateUser, forgotPassword, verifyPasswordOTP, updatePassword, getUser }

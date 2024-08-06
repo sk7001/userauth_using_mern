@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css"
 import { useState } from "react";
-import { emailRegex, passwordRegex } from "../../Utils/Regex";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useGoogleLogin } from "@react-oauth/google";
+import { emailRegex, passwordRegex } from "../../../Utils/Regex";
 function Login() {
   const navigate = useNavigate()
 
@@ -92,9 +92,9 @@ function Login() {
           </div>
         </div>
         <div className="InputContainer">
-          <input value={userDetails.email} name="email" type="email" onChange={handleonchange} placeholder="E-Mail" autocomplete="off"/>
+          <input value={userDetails.email} name="email" type="email" onChange={handleonchange} placeholder="E-Mail" />
           <div className="PasswordContainer">
-            <input value={userDetails.password} name="password" type={show ? "text" : "Password"} onChange={handleonchange} placeholder="Password" autocomplete="off"/>
+            <input value={userDetails.password} name="password" type={show ? "text" : "Password"} onChange={handleonchange} placeholder="Password" />
             <button onClick={handleshow}>{show ? "HIDE" : "SHOW"}</button>
           </div>
           <button onClick={handleonclick}>Login</button>
