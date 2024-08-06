@@ -39,7 +39,7 @@ const register = async (req, res) => {
 
         await newUser.save()
 
-        const emailBody = `<p> Please click on the link to verify your account. <b>http://localhost:2000/user/verify/${verificationToken}</b></p>`;
+        const emailBody = `<p> Please click on the link to verify your account. <b>${process.env.SERVER_URL}/user/verify/${verificationToken}</b></p>`;
         const subject = 'Verification Email'
         await sendEmail(req.body.email, subject, emailBody).then(response => {
             console.log('Email sent successfully:', response);
@@ -133,10 +133,10 @@ const verifyUser = async (req, res) => {
         console.log(isTokenValid);
         if (isTokenValid) {
             isTokenValid.isVerified = true
-            res.send(`Your email has been verified. Please login to continue.<a href="http://localhost:3000/">Login</a>`);
+            res.send(`Your email has been verified. Please login to continue.<a href="${process.env.CLIENT_URL}/">Login</a>`);
         }
         else {
-            res.send(`Link has been expired. Please signup again to continue.<a href="http://localhost:2000/user/resendVerification/${token}">Resend Verification Mail</a>`)
+            res.send(`Link has been expired. Please signup again to continue.<a href="${process.env.SERVER_URL}/user/resendVerification/${token}">Resend Verification Mail</a>`)
             return res.status(400).json({ message: "Token ivalid or expired" })
         }
         await isTokenValid.save()
@@ -170,7 +170,7 @@ const resendVerification = async (req, res) => {
             await user.save()
             res.status(200).json({ message: "Please check your email for your new verification link." })
 
-            const emailBody = `<p> Please click on the link to verify your account. <b>http://localhost:2000/user/verify/${verificationToken}</b></p>`;
+            const emailBody = `<p> Please click on the link to verify your account. <b>${process.env.SERVER_URL}/user/verify/${verificationToken}</b></p>`;
             const subject = 'Reverification Email'
             await sendEmail(user.email, subject, emailBody)
         }
@@ -190,7 +190,7 @@ const resendVerification = async (req, res) => {
             await user.save()
             res.send("Please check your email for your new verification link.")
 
-            const emailBody = `<p> Please click on the link to verify your account. <b>http://localhost:2000/user/verify/${verificationToken}</b></p>`;
+            const emailBody = `<p> Please click on the link to verify your account. <b>${process.env.SERVER_URL}/user/verify/${verificationToken}</b></p>`;
             const subject = 'Reverification Email'
             await sendEmail(user.email, subject, emailBody).then(response => {
                 console.log('Email sent successfully:', response);
