@@ -23,7 +23,7 @@ export default function Home() {
   }
   useEffect(() => {
     getUser();
-  }, []);
+  }, [getUser]);
 
   const handleOnLogout = () => {
     localStorage.clear();
